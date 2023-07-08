@@ -18,19 +18,19 @@ Kamus Bahasa Mooi adalah kamus digital untuk bahasa Mooi, sebuah bahasa daerah y
 ## 📖 Panduan Menjalankan Project
 
 - **Instalasi Node.js**: Astro membutuhkan Node.js versi 14.15.1 atau lebih baru. Anda bisa mengunduh Node.js dari situs resmi Node.js.
-- **Clone Project**: Anda bisa clone proyek ini dengan buka terminal atau command line, lalu jalankan perintah berikut:
+- **Clone Project**: Anda bisa clone proyek ini dengan cara buka terminal atau command line, lalu jalankan perintah berikut:
 
   ```bash
   git clone https://github.com/antroytech/kamus-bahasa-mooi.git
   ```
 
-- **Install Dependencies**: Anda bisa menginstall dependencies yang dibutuh dengan npm, yarn, atau pnpm. Jika Anda menggunakan npm, gunakan perintah berikut:
+- **Install Dependencies**: Anda bisa menginstall dependencies yang dibutuhkan dengan npm, yarn, atau pnpm. Jika Anda menggunakan npm, gunakan perintah berikut:
 
   ```bash
   npm install
   ```
 
-- **Menjalankan Proyek**: Pindah ke direktori proyek dengan `cd my-astro-project`, lalu jalankan proyek menggunakan NPM:
+- **Menjalankan Proyek**: Pindah ke direktori proyek dengan `cd kamus-bahasa-mooi`, lalu jalankan proyek menggunakan NPM:
 
   ```bash
   npm run dev

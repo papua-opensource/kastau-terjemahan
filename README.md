@@ -40,6 +40,9 @@ Kamus Bahasa Mooi adalah kamus digital untuk bahasa Mooi, sebuah bahasa daerah y
 
 Kami sangat menerima kontribusi dalam berbagai bentuk. Anda bisa melakukan fork pada repository ini, membuat perubahan pada cabang (branch) Anda sendiri, lalu mengirimkan pull request.
 
+Berikut ini merupakan Kamus Bahasa Mooi - Bahasa Indonesia yang digunakan sebagai sumber utama kata-kata pada proyek ini:
+[Kamus Bahasa Mooi](https://mooi.kamusdaerahdaring.com/profil.php)
+
 Sebelum mengirimkan pull request, pastikan Anda telah melakukan tes yang memadai pada kode Anda dan semua tes telah lulus. Juga, jelaskan perubahan apa yang Anda buat dan mengapa Anda merasa itu perlu dalam deskripsi pull request Anda.
 
 Jika Anda menemukan bug atau ingin mengusulkan peningkatan, silakan buat issue baru.

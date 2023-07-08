@@ -1,0 +1,30 @@
+---
+export interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!-- Global Metadata -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<meta name="generator" content={Astro.generator} />
+
+<!-- Primary Meta Tags -->
+<title>{title}</title>
+<meta name="title" content={title} />
+<meta name="description" content={description} />
+
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.4/flowbite.min.css"
+  rel="stylesheet"
+/>
+
+<link rel="preconnect" href="https://fonts.bunny.net" />
+<link
+  href="https://fonts.bunny.net/css?family=plus-jakarta-sans:200,300,400,500,600,700,800"
+  rel="stylesheet"
+/>

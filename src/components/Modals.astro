@@ -1,0 +1,75 @@
+<!-- Main modal -->
+<div
+    id="feedback-modal"
+    tabindex="-1"
+    aria-hidden="true"
+    class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full"
+>
+    <div class="relative w-full max-w-md max-h-full">
+       <!-- Modal content -->
+        <div class="relative bg-white rounded-lg shadow">
+            <button
+                type="button"
+                class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center"
+                data-modal-hide="feedback-modal"
+            >
+                <svgonsubmitonsubmit
+                    aria-hidden="true"
+                    class="w-5 h-5"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg"
+                    ><path
+                        fill-rule="evenodd"
+                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                        clip-rule="evenodd"></path></svgonsubmitonsubmit
+                >
+                <span class="sr-only">Close modal</span>
+            </button>
+            <!-- Modal header -->
+            <div class="px-6 py-4 border-b rounded-t">
+                <h3
+                    class="text-base font-semibold text-gray-900 lg:text-xl"
+                >
+                    Berikan saran
+                </h3>
+            </div>
+            <!-- Modal body -->
+            <form id="feedback-form" class="p-6">
+                <p
+                    class="text-sm mb-4 font-normal text-gray-500"
+                >
+                    Saran anda akan membantu pengembangan aplikasi menjadi lebih
+                    baik.
+                </p>
+                <textarea
+                    id="message"
+                    name="message"
+                    rows="4"
+                    class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+                    placeholder="Tulis saran anda disini..."
+                    required></textarea>
+                <!-- Modal footer -->
+                <div
+                    class="flex items-center py-6 space-x-2 border-t border-gray-200 rounded-b"
+                >
+                    <button
+                        type="submit"
+                        class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm"
+                    >
+                        Kirim saran
+                    </button>
+                    <button
+                        type="button"
+                        data-modal-hide="feedback-modal"
+                        class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm"
+                    >
+                        Batal
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="../lib/feedback.ts"></script>

@@ -45,28 +45,30 @@
 </div>
 
 <div class="flex flex-col sm:flex-row">
-  <div class="w-full sm:mb-4 border-t border-b border-l">
-    <div class="px-6 md:px-8 py-4 bg-white">
-      <textarea
-        id="source-text"
-        rows="6"
-        class="block w-full px-0 text-base font-inter text-gray-800 bg-white border-0 focus:ring-0"
-        placeholder="Masukan kata..."
-        required></textarea>
+  <div class="w-full sm:mb-4 border-t border-b border-l rounded-bl-lg">
+    <div class="px-6 md:px-8 py-4">
+      <div class="overflow-hidden">
+        <textarea
+          id="source-text"
+          class="w-full resize-none border-0 border-gray-200 px-0 align-top text-sm sm:text-base font-inter"
+          rows="6"
+          placeholder="Masukan kata..."></textarea>
+      </div>
     </div>
   </div>
-  <div class="w-full mb-4 border border-t-0 sm:border-t">
-    <div id="translations" class="px-6 md:px-8 py-4 bg-white hidden">
-      <textarea
-        id="target-text"
-        rows="6"
-        class="block w-full px-0 text-base text-gray-800 bg-white capitalize border-0 focus:ring-0"
-        placeholder="Terjemahan"
-        readonly></textarea>
+  <div class="w-full mb-4 border border-t-0 sm:border-t rounded-br-lg">
+    <div id="translations" class="px-6 md:px-8 py-4">
+      <div class="overflow-hidden">
+        <textarea
+          id="target-text"
+          rows="6"
+          class="w-full resize-none border-x-0 border-y-0 px-0 align-top text-sm sm:text-base font-inter"
+          placeholder="Terjemahan"
+          readonly></textarea>
+      </div>
     </div>
   </div>
 </div>
-
 
 <div class="text-start md:text-end px-2 pb-3">
   <a
@@ -80,18 +82,22 @@
 
 <div class="max-w-screen-xl mx-auto px-2 md:px-0">
   <div class="flex flex-col sm:flex-row gap-2">
-    <div id="related-words-title" class="w-full p-4 md:p-6 border rounded-lg hidden">
+    <div
+      id="related-words-title"
+      class="w-full p-4 md:p-6 border rounded-lg hidden"
+    >
       <div class="md:mx-4">
         <h2 class="text-lg font-normal text-gray-900">Kata-kata terkait</h2>
 
         <ul id="results" class="flex flex-col divide-y divide-gray-200"></ul>
       </div>
     </div>
-    <div id="example-usage-title" class="w-full my-0 p-6 border rounded-lg hidden">
+    <div
+      id="example-usage-title"
+      class="w-full my-0 p-6 border rounded-lg hidden"
+    >
       <div class="md:mx-4">
-        <h2 class="text-lg font-normal text-gray-900">
-          Contoh penggunaan
-        </h2>
+        <h2 class="text-lg font-normal text-gray-900">Contoh penggunaan</h2>
 
         <ul id="examples" class="flex flex-col divide-y divide-gray-200"></ul>
       </div>
@@ -100,4 +106,3 @@
 </div>
 
 <script src="../lib/translator.ts"></script>
-<script src="../lib/words.ts"></script>

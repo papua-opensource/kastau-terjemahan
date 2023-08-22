@@ -4,9 +4,11 @@ module.exports = {
     theme: {
         extend: {
             fontFamily: {
-                inter: ["Inter"]
+                inter: ["Inter"],
+                diplomata: ["Diplomata"],
+                sofia: ["Sofia Sans"]
             }
         }
     },
-    plugins: []
+    plugins: [require('@tailwindcss/forms'),]
 };

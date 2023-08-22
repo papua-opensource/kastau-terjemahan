@@ -1,0 +1,47 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Alfabet • Kamus Bahasa Moy">
+  <main>
+    <section
+      class="z-10 before:absolute before:z-0 before:h-24 before:w-full before:border-b before:border-gray-200 before:bg-gray-50 before:content-['']"
+    >
+      <div class="mx-auto max-w-screen-xl px-2 lg:px-36">
+        <div class="flex flex-row">
+          <div class="top-32 z-10 w-full py-14">
+            <div
+              class="grid grid-cols-1 gap-4 rounded border bg-white p-4 lg:grid-cols-[120px_1fr] lg:gap-8"
+            >
+              <div class="h-auto lg:border-r">
+                <div class="my-4 border-b pb-4">
+                  <p class="font-sofia text-center text-gray-600">ABJAD</p>
+                </div>
+
+                <ul
+                  class="flex h-[2.5rem] flex-row gap-2 overflow-scroll lg:h-[22rem] lg:flex-col"
+                  id="alphabetList"
+                >
+                </ul>
+              </div>
+              <div class="h-auto">
+                <div class="my-4 border-b px-4 text-right">
+                  <span
+                    class="font-diplomata text-3xl text-gray-800"
+                    id="titleAlphabet">A</span
+                  >
+                </div>
+                <div class="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-2">
+                  <div id="word-results" class=""></div>
+                  <div id="example-usage-results" class="lg:col-span-2"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<script src="../lib/alphabet.ts"></script>

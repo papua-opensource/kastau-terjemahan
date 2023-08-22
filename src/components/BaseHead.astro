@@ -2,11 +2,13 @@
 export interface Props {
   title: string;
   description?: string;
+  image?: string;
 }
 
 const {
   title,
   description = "Proyek ini adalah sebuah inisiatif sukarela yang berdedikasi untuk pelestarian dan pengembangan bahasa daerah Moy. Kami yakin bahwa setiap bahasa merupakan cerminan dari suatu budaya, sebuah warisan yang layak untuk dijaga dan dikembangkan. Bahasa Mooi, sebagai bagian integral dari warisan budaya, layak mendapatkan perhatian dan pengakuan yang sama. ",
+  image = '/preview.png'
 } = Astro.props;
 ---
 
@@ -26,12 +28,14 @@ const {
 <meta property="og:url" content={Astro.url} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
+<meta property="og:image" content={new URL(image, Astro.url)} />
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:url" content={Astro.url} />
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
+<meta property="twitter:image" content={new URL(image, Astro.url)} />
 
 <link
   href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.4/flowbite.min.css"

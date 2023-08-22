@@ -27,7 +27,7 @@ async function displayDataForLetter(letter: string) {
                 <p class="font-inter px-4">
                     <u>${item.mooi_kata}</u> [${item.mooi_lafal}] n: <em>${item.mooi_arti}</em>
                 </p>
-                <div class="font-sofia absolute -right-2 -top-2 inline-flex h-6 w-6 items-center justify-center rounded-full border-2 border-white bg-gray-100 text-xs text-gray-600 dark:border-gray-900 lg:hidden">${index + 1}</div>
+                <div class="font-sofia absolute -right-2 -top-2 inline-flex h-6 w-6 items-center justify-center rounded-full border-2 border-white bg-gray-100 text-xs text-gray-600 lg:hidden">${index + 1}</div>
             `;
             wordContainer.appendChild(wordCard);
 
@@ -38,7 +38,7 @@ async function displayDataForLetter(letter: string) {
                 <p class="font-inter px-4 py-2">
                     ${item.mooi_contoh} → ${item.indo_contoh} 
                 </p>
-                <div class="font-sofia absolute -right-2 -top-2 inline-flex h-6 w-6 items-center justify-center rounded-full border-2 border-white bg-gray-100 text-xs text-gray-600 dark:border-gray-900 lg:hidden">${index + 1}</div>
+                <div class="font-sofia absolute -right-2 -top-2 inline-flex h-6 w-6 items-center justify-center rounded-full border-2 border-white bg-gray-100 text-xs text-gray-600 lg:hidden">${index + 1}</div>
             `;
             exampleUsageContainer.appendChild(exampleCard);
         });

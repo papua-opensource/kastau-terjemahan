@@ -32,6 +32,7 @@ export async function handleSubmit(event: Event) {
         }
       }
     );
+    form.reset()
   }
 }
 

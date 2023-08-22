@@ -4,7 +4,7 @@
   >
     <h1
       id="source"
-      class="pt-1 text-base font-semibold text-gray-600 capitalize"
+      class="pt-1 text-base font-inter font-medium text-gray-600 capitalize"
     >
       mooi
     </h1>
@@ -37,19 +37,20 @@
   >
     <h1
       id="target"
-      class="pt-1 text-base font-semibold text-gray-600 capitalize"
+      class="pt-1 text-base font-inter font-medium text-gray-600 capitalize"
     >
       indonesia
     </h1>
   </div>
 </div>
+
 <div class="flex flex-col sm:flex-row">
   <div class="w-full sm:mb-4 border-t border-b border-l">
     <div class="px-6 md:px-8 py-4 bg-white">
       <textarea
         id="source-text"
         rows="6"
-        class="block w-full px-0 text-base text-gray-800 bg-white border-0 focus:ring-0"
+        class="block w-full px-0 text-base font-inter text-gray-800 bg-white border-0 focus:ring-0"
         placeholder="Masukan kata..."
         required></textarea>
     </div>
@@ -66,11 +67,12 @@
   </div>
 </div>
 
-<div class="text-start md:text-end px-2 mb-4">
+
+<div class="text-start md:text-end px-2 pb-3">
   <a
     data-modal-target="feedback-modal"
     data-modal-toggle="feedback-modal"
-    class="text-gray-500 text-sm underline cursor-pointer"
+    class="text-gray-500 font-inter text-sm underline cursor-pointer"
   >
     Berikan saran
   </a>
@@ -78,14 +80,14 @@
 
 <div class="max-w-screen-xl mx-auto px-2 md:px-0">
   <div class="flex flex-col sm:flex-row gap-2">
-    <div id="related-words-title" class="w-full p-4 md:p-6 border rounded hidden">
+    <div id="related-words-title" class="w-full p-4 md:p-6 border rounded-lg hidden">
       <div class="md:mx-4">
         <h2 class="text-lg font-normal text-gray-900">Kata-kata terkait</h2>
 
         <ul id="results" class="flex flex-col divide-y divide-gray-200"></ul>
       </div>
     </div>
-    <div id="example-usage-title" class="w-full my-0 p-6 border rounded hidden">
+    <div id="example-usage-title" class="w-full my-0 p-6 border rounded-lg hidden">
       <div class="md:mx-4">
         <h2 class="text-lg font-normal text-gray-900">
           Contoh penggunaan

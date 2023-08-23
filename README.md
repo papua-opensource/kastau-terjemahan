@@ -12,7 +12,7 @@ Kamus Bahasa Mooi adalah kamus digital untuk bahasa Mooi, sebuah bahasa daerah y
 ## Teknologi yang digunakan
 
 - Front-End: [Tailwind CSS](https://tailwindcss.com/)
-- Framework: [Astro](https://astro.build)
+- Framework: [Astro.js](https://astro.build)
 - Database: [Supabase](https://supabase.com)
 
 ## 📖 Panduan Menjalankan Project
@@ -21,16 +21,16 @@ Kamus Bahasa Mooi adalah kamus digital untuk bahasa Mooi, sebuah bahasa daerah y
 - **Clone Project**: Anda bisa clone proyek ini dengan cara buka terminal atau command line, lalu jalankan perintah berikut:
 
   ```bash
-  git clone https://github.com/antroytech/kamus-bahasa-mooi.git
+  git clone https://github.com/antheiz/kamus-bahasa-mooi.git
   ```
 
-- **Install Dependencies**: Anda bisa menginstall dependencies yang dibutuhkan dengan npm, yarn, atau pnpm. Jika Anda menggunakan npm, gunakan perintah berikut:
+- **Install Dependencies**: Pindah ke direktori proyek dengan `cd kamus-bahasa-mooi`, Lalu bisa menginstall dependencies yang dibutuhkan dengan npm, yarn, atau pnpm. Jika Anda menggunakan npm, gunakan perintah berikut:
 
   ```bash
   npm install
   ```
 
-- **Menjalankan Proyek**: Pindah ke direktori proyek dengan `cd kamus-bahasa-mooi`, lalu jalankan proyek menggunakan NPM:
+- **Menjalankan Proyek**: Jalankan proyek menggunakan NPM:
 
   ```bash
   npm run dev

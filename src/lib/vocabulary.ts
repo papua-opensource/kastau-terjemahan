@@ -24,23 +24,36 @@ async function displayDataForLetter(letter: string) {
             const wordCard = document.createElement("div");
             wordCard.className = "relative my-2 flex h-16 items-center bg-gray-100";
             wordCard.innerHTML = `
-                <p class="font-inter px-4">
-                    <u>${item.mooi_kata}</u> [${item.mooi_lafal}] n: <em>${item.mooi_arti}</em>
-                </p>
-                <div class="font-sofia absolute -right-2 -top-2 inline-flex h-6 w-6 items-center justify-center rounded-full border-2 border-white bg-gray-100 text-xs text-gray-600 lg:hidden">${index + 1}</div>
-            `;
+            <p class="font-inter px-4">
+                <u>${item.mooi_kata}</u> [${item.mooi_lafal}] n: <em>${item.mooi_arti}</em>
+            </p>
+            <div class="font-sofia absolute -right-2 -top-2 inline-flex h-6 w-6 items-center justify-center rounded-full border-2 border-white bg-gray-100 text-xs text-gray-600 lg:hidden">${index + 1}</div>
+        `;
             wordContainer.appendChild(wordCard);
+            if (item.mooi_contoh) {
 
-            // Membuat card untuk contoh penggunaan
-            const exampleCard = document.createElement("div");
-            exampleCard.className = "relative my-2 flex h-16 items-center bg-gray-100";
-            exampleCard.innerHTML = `
+                // Membuat card untuk contoh penggunaan
+                const exampleCard = document.createElement("div");
+                exampleCard.className = "relative my-2 flex h-16 items-center bg-gray-100";
+                exampleCard.innerHTML = `
                 <p class="font-inter px-4 py-2">
                     ${item.mooi_contoh} → ${item.indo_contoh} 
                 </p>
                 <div class="font-sofia absolute -right-2 -top-2 inline-flex h-6 w-6 items-center justify-center rounded-full border-2 border-white bg-gray-100 text-xs text-gray-600 lg:hidden">${index + 1}</div>
             `;
-            exampleUsageContainer.appendChild(exampleCard);
+                exampleUsageContainer.appendChild(exampleCard);
+            } else {
+                // Membuat card untuk contoh penggunaan yang tidak ada
+                const exampleCard = document.createElement("div");
+                exampleCard.className = "relative my-2 flex h-16 items-center bg-gray-100";
+                exampleCard.innerHTML = `
+                <p class="font-inter text-gray-500 px-4 py-2">
+                    belum tersedia
+                </p>
+                <div class="font-sofia absolute -right-2 -top-2 inline-flex h-6 w-6 items-center justify-center rounded-full border-2 border-white bg-gray-100 text-xs text-gray-600 lg:hidden">${index + 1}</div>
+            `;
+                exampleUsageContainer.appendChild(exampleCard);
+            }
         });
     } else {
         // Menampilkan pesan ketika data kosong atau null
@@ -73,7 +86,7 @@ for (let i = 65; i <= 90; i++) {
 
         // Menambahkan kelas yang dipilih ke elemen li yang diklik
         li.classList.add("bg-gray-100");
-        
+
         // Memperbarui konten titleAlphabet
         titleAlphabet.textContent = letter;
 

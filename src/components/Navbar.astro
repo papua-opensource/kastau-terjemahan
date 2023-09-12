@@ -67,13 +67,13 @@ const currentPath = Astro.url.pathname;
     >
       <div class="flex flex-col md:flex-row gap-x-6">
         <a
-          :class="currentPath === '/alphabet' ? 'text-blue-500' : 'text-gray-700'"
-          class="my-2 font-inter transition-colors duration-300 transform hover:text-blue-500 md:my-0"
+          :class="currentPath === '/vocabulary' ? 'border-b border-gray-400' : 'border-none'"
+          class="my-2 font-inter transition-colors duration-300 transform hover:text-gray-500 md:my-0"
           href="/vocabulary">Kosakata</a
         >
         <a
-          :class="currentPath === '/about' ? 'text-blue-500' : 'text-gray-700'"
-          class="my-2 font-inter transition-colors duration-300 transform hover:text-blue-500 md:my-0"
+          :class="currentPath === '/about' ? 'border-b border-gray-400' : 'border-none'"
+          class="my-2 font-inter transition-colors duration-300 transform hover:text-gray-500 md:my-0"
           href="/about">Tentang</a
         >
       </div>

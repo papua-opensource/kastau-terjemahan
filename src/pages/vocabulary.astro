@@ -1,5 +1,11 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import VocabularyList from "../components/Vocabulary/VocabularyList.astro";
+import VocabularyModal from "../components/Vocabulary/VocabularyModal.astro";
+import { fetchFilteredData } from "../lib/words";
+import Alphabet from "../components/Vocabulary/Alphabet.astro";
+
+const data = await fetchFilteredData("A");
 ---
 
 <Layout title="Kosa kata • Kamus Bahasa Moy">
@@ -14,34 +20,16 @@ import Layout from "../layouts/Layout.astro";
               class="grid grid-cols-1 gap-4 rounded border bg-white p-4 lg:grid-cols-[120px_1fr] lg:gap-8"
             >
               <div class="h-auto lg:border-r">
-                <div class="my-4 border-b pb-4">
-                  <p class="font-sofia text-center text-gray-600">ABJAD</p>
-                </div>
-
-                <ul
-                  class="flex h-[2.5rem] flex-row gap-2 overflow-scroll lg:h-[22rem] lg:flex-col"
-                  id="alphabetList"
-                >
-                </ul>
+                <Alphabet/>
               </div>
               <div class="h-auto">
-                <div class="my-4 border-b px-4 text-right">
-                  <span
-                    class="font-diplomata text-3xl text-gray-800"
-                    id="titleAlphabet">A</span
-                  >
-                </div>
-                <div class="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-2">
-                  <div id="word-results" class=""></div>
-                  <div id="example-usage-results" class="lg:col-span-2"></div>
-                </div>
+                <VocabularyList items={data} />
               </div>
             </div>
           </div>
         </div>
       </div>
     </section>
+    <VocabularyModal items={data} />
   </main>
 </Layout>
-
-<script src="../lib/vocabulary.ts"></script>

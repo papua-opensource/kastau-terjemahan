@@ -1,7 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import CardTranslator from "../components/CardTranslator.astro";
-import Modals from "../components/Modals.astro";
+import Translator from "../components/Translator.astro";
+import FeedbackModal from "../components/FeedbackModal.astro";
 ---
 
 <Layout title="Beranda • Kamus Bahasa Mooi">
@@ -12,11 +12,11 @@ import Modals from "../components/Modals.astro";
       <div class="max-w-screen-xl mx-auto px-2 lg:px-36">
         <div class="flex flex-row">
           <div class="py-14 top-32 h z-10 w-full">
-            <CardTranslator />
+            <Translator />
           </div>
         </div>
-        <Modals/>
       </div>
     </section>
+    <FeedbackModal/>    
   </main>
 </Layout>

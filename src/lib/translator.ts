@@ -1,15 +1,13 @@
 import { fetchData, ResultItem } from "./words";
 
 // Mendapatkan referensi elemen-elemen HTML yang akan digunakan
-const sourceLangElement = document.querySelector("#source") as HTMLInputElement;
-const targetLangElement = document.querySelector("#target") as HTMLInputElement;
-const sourceTextArea = document.querySelector("#source-text") as HTMLTextAreaElement;
-const targetTextArea = document.querySelector("#target-text") as HTMLTextAreaElement;
-const switchButton = document.querySelector("#switch-button") as HTMLButtonElement;
+const sourceLangElement = document.getElementById("source") as HTMLInputElement;
+const targetLangElement = document.getElementById("target") as HTMLInputElement;
+const sourceTextArea = document.getElementById("source-text") as HTMLTextAreaElement;
+const targetTextArea = document.getElementById("target-text") as HTMLTextAreaElement;
+const switchButton = document.getElementById("switch-button") as HTMLButtonElement;
 const resultsContainer = document.getElementById("results") as HTMLUListElement;
-const examplesContainer = document.getElementById("examples") as HTMLUListElement;
-const relatedWordsTitle = document.getElementById("related-words-title") as HTMLInputElement;
-const exampleUsageTitle = document.getElementById("example-usage-title") as HTMLInputElement;
+const relateWordsContainer = document.getElementById("related-words-container") as HTMLElement
 
 /**
  * Fungsi untuk menukar bahasa sumber dan bahasa tujuan.
@@ -42,9 +40,7 @@ async function translate(): Promise<void> {
   if (query.trim() === "") {
     targetTextArea.value = "";
     resultsContainer.innerHTML = "";
-    examplesContainer.innerHTML = "";
-    relatedWordsTitle.classList.add("hidden");
-    exampleUsageTitle.classList.add("hidden");
+    relateWordsContainer.classList.add("hidden")
     return;
   }
 
@@ -69,9 +65,7 @@ async function translate(): Promise<void> {
     if (results.length === 0) {
       targetTextArea.value = "Hasil tidak ditemukan.";
       resultsContainer.innerHTML = "";
-      examplesContainer.innerHTML = "";
-      relatedWordsTitle.classList.add("hidden");
-      exampleUsageTitle.classList.add("hidden");
+      relateWordsContainer.classList.add("hidden")
       return;
     }
 
@@ -87,7 +81,7 @@ async function translate(): Promise<void> {
     console.error("Failed to fetch dictionary:", error);
     targetTextArea.value = "An error occurred while fetching data.";
     resultsContainer.innerHTML = "";
-    examplesContainer.innerHTML = "";
+    relateWordsContainer.classList.add("hidden")
   }
 }
 
@@ -102,7 +96,6 @@ function displayList(
   element: HTMLElement,
   data: any[],
   sourceLang: string,
-  contentType: "Kata-kata terkait" | "Contoh penggunaan"
 ) {
   // Bersihkan item daftar yang ada
   element.innerHTML = "";
@@ -111,20 +104,25 @@ function displayList(
   data.forEach((item) => {
     const listItem = document.createElement("li");
     listItem.className =
-      "inline-flex items-center gap-x-1 py-3 pl-2 md:pl-2 text-base font-normal text-gray-800";
+      "flex justify-between gap-x-6 py-3 pl-2 text-base font-normal text-gray-800 md:pl-2";
 
-    if (contentType === "Kata-kata terkait") {
-      if (sourceLang === "mooi" && item) {
-        listItem.innerHTML = `${item.mooi_kata} [${item.mooi_lafal}] ${item.kelas_kata}: ${item.mooi_arti}`;
-      } else if (item) {
-        listItem.innerHTML = `${item.indo_kata} ${item.kelas_kata} : ${item.mooi_arti} [${item.mooi_lafal}]`;
-      }
-    } else if (contentType === "Contoh penggunaan") {
-      if (sourceLang === "mooi" && item) {
-        listItem.innerHTML = `${item.mooi_contoh} &#8594; ${item.indo_contoh}`;
-      } else if (item) {
-        listItem.innerHTML = `${item.indo_contoh} &#8594; ${item.mooi_contoh}`;
-      }
+    if (sourceLang === "mooi" && item) {
+      // listItem.innerHTML = `${item.mooi_kata} [${item.mooi_lafal}] ${item.kelas_kata}: ${item.mooi_arti}`;
+      listItem.innerHTML = `
+      <div class="inline-flex gap-x-4">
+        <span class="font-medium">${item.mooi_kata}</span>
+        <span class="font-inter pt-0.5 text-sm text-gray-500">${item.mooi_arti}</span>
+        </div>
+        <div class="font-inter pt-0.5 text-sm text-gray-500">${item.kelas_kata.replace(/^./, str => str.toUpperCase())}</div>
+      `
+    } else if (item) {
+      listItem.innerHTML = `
+      <div class="inline-flex gap-x-4">
+        <span class="font-medium">${item.indo_kata}</span>
+        <span class="font-inter pt-0.5 text-sm text-gray-500">${item.mooi_kata}</span>
+        </div>
+        <div class="font-inter pt-0.5 text-sm text-gray-500">${item.kelas_kata.replace(/^./, str => str.toUpperCase())}</div>
+      `
     }
     element.appendChild(listItem);
   });
@@ -138,22 +136,17 @@ function displayList(
 function displayResults(results: ResultItem[], sourceLang: string): void {
   // Jika tidak ada hasil, sembunyikan kontainer
   if (results.length === 0) {
+    relateWordsContainer.classList.add("hidden");
     resultsContainer.parentElement?.parentElement?.classList.add("hidden");
-    examplesContainer.parentElement?.parentElement?.classList.add("hidden");
-    relatedWordsTitle.classList.add("hidden");
-    exampleUsageTitle.classList.add("hidden");
     return;
   }
 
   // Tampilkan kontainer jika ada hasil
+  relateWordsContainer.classList.remove("hidden");
   resultsContainer.parentElement?.parentElement?.classList.remove("hidden");
-  examplesContainer.parentElement?.parentElement?.classList.remove("hidden");
-  relatedWordsTitle.classList.remove("hidden"); // Tampilkan judul
-  exampleUsageTitle.classList.remove("hidden");
 
   // Tampilkan data di elemen yang sesuai
-  displayList(resultsContainer, results, sourceLang, "Kata-kata terkait");
-  displayList(examplesContainer, results, sourceLang, "Contoh penggunaan");
+  displayList(resultsContainer, results, sourceLang);
 }
 
 // Tambahkan event listener untuk input area teks dan klik tombol switch

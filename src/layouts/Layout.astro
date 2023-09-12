@@ -1,5 +1,6 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
+import Footer from "../components/Footer.astro";
 import Navbar from "../components/Navbar.astro";
 
 const { title, description } = Astro.props;
@@ -10,9 +11,10 @@ const { title, description } = Astro.props;
   <head>
     <BaseHead title={title} description={description} />
   </head>
-  <body>
+  <body class="min-h-screen">
     <Navbar/>
     <slot />
+    <Footer/>
 
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.6/flowbite.min.js"

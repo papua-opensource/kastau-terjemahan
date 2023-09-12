@@ -1,100 +1,52 @@
-import { fetchFilteredData } from "./words";
+import { fetchFilteredData } from "../lib/words";
 
 // Mendapatkan referensi elemen-elemen utama
-const wordContainer = document.getElementById("word-results") as HTMLElement;
-const exampleUsageContainer = document.getElementById("example-usage-results") as HTMLElement;
-const alphabetList = document.getElementById("alphabetList") as HTMLElement;
-const titleAlphabet = document.getElementById("titleAlphabet") as HTMLElement;
+const vocabList = document.getElementById("listVocabulary") as HTMLUListElement;
 
 // Fungsi untuk menampilkan data berdasarkan huruf yang dipilih
-async function displayDataForLetter(letter: string) {
+export async function displayDataForLetter(letter: string) {
     // Menghapus konten yang ada
-    wordContainer.innerHTML = '';
-    exampleUsageContainer.innerHTML = '';
+    vocabList.innerHTML = "";
 
-    // Menambahkan header ke setiap kontainer
-    wordContainer.innerHTML = '<h2 class="font-sofia text-xl text-gray-900">Kata</h2>';
-    exampleUsageContainer.innerHTML = '<h2 class="font-sofia text-xl text-gray-900">Contoh penggunaan</h2>';
-
-    // Mengambil data berdasarkan huruf yang diberikan
     const data = await fetchFilteredData(letter);
     if (data && data.length > 0) {
         data.forEach((item, index) => {
             // Membuat card untuk kata
-            const wordCard = document.createElement("div");
-            wordCard.className = "relative my-2 flex h-16 items-center bg-gray-100";
-            wordCard.innerHTML = `
-            <p class="font-inter px-4">
-                <u>${item.mooi_kata}</u> [${item.mooi_lafal}] n: <em>${item.mooi_arti}</em>
-            </p>
-            <div class="font-sofia absolute -right-2 -top-2 inline-flex h-6 w-6 items-center justify-center rounded-full border-2 border-white bg-gray-100 text-xs text-gray-600 lg:hidden">${index + 1}</div>
-        `;
-            wordContainer.appendChild(wordCard);
-            if (item.mooi_contoh) {
-
-                // Membuat card untuk contoh penggunaan
-                const exampleCard = document.createElement("div");
-                exampleCard.className = "relative my-2 flex h-16 items-center bg-gray-100";
-                exampleCard.innerHTML = `
-                <p class="font-inter px-4 py-2">
-                    ${item.mooi_contoh} → ${item.indo_contoh} 
-                </p>
-                <div class="font-sofia absolute -right-2 -top-2 inline-flex h-6 w-6 items-center justify-center rounded-full border-2 border-white bg-gray-100 text-xs text-gray-600 lg:hidden">${index + 1}</div>
+            const listItem = document.createElement("li");
+            listItem.className = "flex justify-between my-2 p-4 items-center border border-gray-200 rounded-md cursor-pointer";
+            listItem.setAttribute("data-modal-target", `vocabulary-modal-${index}`)
+            listItem.setAttribute("data-modal-toggle", `vocabulary-modal-${index}`)
+            listItem.innerHTML = `
+                    <span>
+                        <p class="text-gray-600">
+                        <strong>${item.mooi_kata}</strong> = ${item.mooi_arti}
+                        </p>
+                    </span>
+                    <span
+                    class="text-sm text-gray-500 underline">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400" viewBox="0 0 24 24">
+                        <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                            <path d="M8 13V4.5a1.5 1.5 0 0 1 3 0V12m0-.5v-2a1.5 1.5 0 0 1 3 0V12m0-1.5a1.5 1.5 0 0 1 3 0V12" />
+                            <path
+                                d="M17 11.5a1.5 1.5 0 0 1 3 0V16a6 6 0 0 1-6 6h-2h.208a6 6 0 0 1-5.012-2.7L7 19c-.312-.479-1.407-2.388-3.286-5.728a1.5 1.5 0 0 1 .536-2.022a1.867 1.867 0 0 1 2.28.28L8 13M5 3L4 2m0 5H3m11-4l1-1m0 4h1" />
+                        </g>
+                    </svg>
+                    </span>
             `;
-                exampleUsageContainer.appendChild(exampleCard);
-            } else {
-                // Membuat card untuk contoh penggunaan yang tidak ada
-                const exampleCard = document.createElement("div");
-                exampleCard.className = "relative my-2 flex h-16 items-center bg-gray-100";
-                exampleCard.innerHTML = `
-                <p class="font-inter text-gray-500 px-4 py-2">
-                    belum tersedia
-                </p>
-                <div class="font-sofia absolute -right-2 -top-2 inline-flex h-6 w-6 items-center justify-center rounded-full border-2 border-white bg-gray-100 text-xs text-gray-600 lg:hidden">${index + 1}</div>
-            `;
-                exampleUsageContainer.appendChild(exampleCard);
-            }
+            vocabList.appendChild(listItem);
         });
     } else {
         // Menampilkan pesan ketika data kosong atau null
         const noDataDiv = document.createElement("div");
         noDataDiv.innerHTML = `
                 <p class="font-inter py-4 text-gray-500">
-                    Tidak ada data yang tersedia.
+                    Belum ada data yang tersedia.
                 </p>                
             `;
-        wordContainer.appendChild(noDataDiv);
+        vocabList.appendChild(noDataDiv);
     }
 }
 
-// Menampilkan data untuk huruf "A" secara default saat halaman dimuat
-displayDataForLetter('A');
+displayDataForLetter("A");
 
-// Melakukan iterasi melalui nilai ASCII untuk huruf A-Z
-for (let i = 65; i <= 90; i++) {
-    const letter = String.fromCharCode(i);
-    const li = document.createElement("li");
-    li.className =
-        "text-center cursor-pointer font-sofia px-3 py-2 text-xl text-gray-500 hover:text-gray-700 hover:bg-gray-100 hover:rounded";
-    li.textContent = letter;
 
-    // Menambahkan event listener ke elemen li
-    li.addEventListener("click", () => {
-        // Menghapus kelas yang dipilih dari semua elemen li
-        const allLiElements = alphabetList?.querySelectorAll("li");
-        allLiElements?.forEach(el => el.classList.remove("bg-gray-100"));
-
-        // Menambahkan kelas yang dipilih ke elemen li yang diklik
-        li.classList.add("bg-gray-100");
-
-        // Memperbarui konten titleAlphabet
-        titleAlphabet.textContent = letter;
-
-        // Mengambil dan menampilkan data untuk huruf yang diklik
-        displayDataForLetter(letter);
-    });
-
-    alphabetList?.appendChild(li);
-    // Menyorot elemen li pertama (huruf "A") secara default
-    alphabetList?.firstElementChild?.classList.add("bg-gray-100");
-}

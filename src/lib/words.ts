@@ -19,13 +19,14 @@ export async function fetchData(): Promise<ResultItem[] | null> {
   // Mengambil data dari tabel kata_indonesia.
   const { data: indoData, error: indoError } = await supabase
     .from("kata_indonesia")
-    .select("kata, contoh, kata_mooi_id (kata, lafal, arti, contoh, kelas_kata_id (nama))");
+    .select("id, kata, contoh, kata_mooi_id (kata, lafal, arti, contoh, kelas_kata_id (nama))");
 
   if (indoData) {
     // Menggabungkan data dari kata_mooi dan kata_indonesia.
     const result: ResultItem[] = indoData.map(
       (indoItem: any, index: number) => {
         return {
+          id: indoItem.id,
           mooi_kata: indoItem.kata_mooi_id.kata,
           mooi_lafal: indoItem.kata_mooi_id.lafal,
           mooi_arti: indoItem.kata_mooi_id.arti,

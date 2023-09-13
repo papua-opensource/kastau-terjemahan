@@ -75,6 +75,7 @@ async function translate(): Promise<void> {
         ? `${results[0].mooi_arti}`
         : `${results[0].mooi_kata}`;
 
+
     // Tampilkan semua hasil di kontainer hasil
     displayResults(results, sourceLang!);
   } catch (error) {

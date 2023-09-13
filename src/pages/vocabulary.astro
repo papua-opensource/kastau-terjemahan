@@ -2,10 +2,14 @@
 import Layout from "../layouts/Layout.astro";
 import VocabularyList from "../components/Vocabulary/VocabularyList.astro";
 import VocabularyModal from "../components/Vocabulary/VocabularyModal.astro";
-import { fetchFilteredData } from "../lib/words";
-import Alphabet from "../components/Vocabulary/Alphabet.astro";
+import { ResultItem, fetchFilteredData } from "../lib/words";
+import { fetchedData } from "../lib/store";
 
-const data = await fetchFilteredData("A");
+// const data = await fetchFilteredData("A");
+let data: ResultItem[] = [];
+fetchedData.subscribe((value) => {
+  data = [...value];
+});
 ---
 
 <Layout title="Kosa kata • Kamus Bahasa Moy">
@@ -20,7 +24,14 @@ const data = await fetchFilteredData("A");
               class="grid grid-cols-1 gap-4 rounded border bg-white p-4 lg:grid-cols-[120px_1fr] lg:gap-8"
             >
               <div class="h-auto lg:border-r">
-                <Alphabet/>
+                <div class="my-4 border-b pb-4">
+                  <p class="font-sofia text-center text-gray-600">ABJAD</p>
+                </div>
+                <ul
+                  id="letterList"
+                  class="flex h-[2.5rem] flex-row gap-2 overflow-scroll lg:h-[22rem] lg:flex-col"
+                >
+                </ul>
               </div>
               <div class="h-auto">
                 <VocabularyList items={data} />
@@ -33,3 +44,39 @@ const data = await fetchFilteredData("A");
     <VocabularyModal items={data} />
   </main>
 </Layout>
+
+<script>
+  import { displayDataForLetter } from "../lib/vocabulary";
+
+  // // Mendapatkan referensi elemen-elemen utama
+  const letterList = document.getElementById("letterList") as HTMLUListElement;
+  const titleAbjad = document.getElementById("titleAbjad") as HTMLSpanElement;
+
+  // Melakukan iterasi melalui nilai ASCII untuk huruf A-Z
+  for (let i = 65; i <= 90; i++) {
+    const letter = String.fromCharCode(i);
+    const li = document.createElement("li");
+    li.className =
+      "text-center cursor-pointer font-sofia px-3 py-2 text-xl text-gray-500 hover:text-gray-700 hover:bg-gray-100 hover:rounded";
+    li.textContent = letter;
+
+    // Menambahkan event listener ke elemen li
+    li.addEventListener("click", () => {
+      // Menghapus kelas yang dipilih dari semua elemen li
+      const allLiElements = letterList?.querySelectorAll("li");
+      allLiElements?.forEach((el) => el.classList.remove("bg-gray-100"));
+
+      // Menambahkan kelas yang dipilih ke elemen li yang diklik
+      li.classList.add("bg-gray-100");
+
+      // Memperbarui konten titleAbjad
+      titleAbjad.textContent = letter;
+
+      displayDataForLetter(letter);
+    });
+
+    letterList?.appendChild(li);
+    // Menyorot elemen li pertama (huruf "A") secara default
+    letterList?.firstElementChild?.classList.add("bg-gray-100");
+  }
+</script>

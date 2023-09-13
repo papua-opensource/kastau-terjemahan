@@ -6,15 +6,15 @@ import Navbar from "../components/Navbar.astro";
 const { title, description } = Astro.props;
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <BaseHead title={title} description={description} />
   </head>
   <body class="min-h-screen">
-    <Navbar/>
+    <Navbar />
     <slot />
-    <Footer/>
+    <Footer />
 
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.6/flowbite.min.js"

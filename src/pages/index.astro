@@ -1,4 +1,5 @@
 ---
+
 import Layout from "../layouts/Layout.astro";
 import Translator from "../components/Translator.astro";
 import FeedbackModal from "../components/FeedbackModal.astro";
@@ -13,10 +14,34 @@ import FeedbackModal from "../components/FeedbackModal.astro";
         <div class="flex flex-row">
           <div class="py-14 top-32 h z-10 w-full">
             <Translator />
+            <div
+              id="related-words-container"
+              class="w-full rounded-lg border p-4 md:w-[50%] md:p-6 hidden"
+            >
+              <h2 class="font-inter font-medium text-gray-900">
+                Kosakata lainnya
+              </h2>
+
+              <ul
+                id="results"
+                class="my-4 flex flex-col divide-y divide-gray-200"
+              >
+              </ul>
+            </div>
+
+            <div class="px-2 pt-3">
+              <span
+                data-modal-target="feedback-modal"
+                data-modal-toggle="feedback-modal"
+                class="font-inter cursor-pointer text-sm text-gray-500 underline"
+              >
+                Berikan saran
+              </span>
+            </div>
           </div>
         </div>
       </div>
     </section>
-    <FeedbackModal/>    
+    <FeedbackModal />
   </main>
 </Layout>

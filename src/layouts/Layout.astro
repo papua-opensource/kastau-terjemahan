@@ -16,8 +16,6 @@ const { title, description } = Astro.props;
     <slot />
     <Footer />
 
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.6/flowbite.min.js"
-    ></script>
+    <script is:inline src="../../node_modules/preline/dist/preline.js"></script>
   </body>
 </html>

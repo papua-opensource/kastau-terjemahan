@@ -1,11 +1,10 @@
 ---
-
 import Layout from "../layouts/Layout.astro";
 import Translator from "../components/Translator.astro";
 import FeedbackModal from "../components/FeedbackModal.astro";
 ---
 
-<Layout title="Beranda • Kamus Bahasa Mooi">
+<Layout title="Beranda • Kastau Terjemahan">
   <main>
     <section
       class="before:content-[''] before:bg-gray-50 before:h-24 before:w-full before:absolute before:border-b before:border-gray-200 before:z-0 z-10"
@@ -19,7 +18,7 @@ import FeedbackModal from "../components/FeedbackModal.astro";
               class="w-full rounded-lg border p-4 md:w-[50%] md:p-6 hidden"
             >
               <h2 class="font-inter font-medium text-gray-900">
-                Kosakata lainnya
+                Kosakata terkait
               </h2>
 
               <ul
@@ -31,8 +30,7 @@ import FeedbackModal from "../components/FeedbackModal.astro";
 
             <div class="px-2 pt-3">
               <span
-                data-modal-target="feedback-modal"
-                data-modal-toggle="feedback-modal"
+                data-hs-overlay="#feedback-modal"
                 class="font-inter cursor-pointer text-sm text-gray-500 underline"
               >
                 Berikan saran
@@ -42,6 +40,9 @@ import FeedbackModal from "../components/FeedbackModal.astro";
         </div>
       </div>
     </section>
+    <div id="vocabModal"></div>
     <FeedbackModal />
   </main>
 </Layout>
+
+<script src="../lib/feedback.ts"></script>

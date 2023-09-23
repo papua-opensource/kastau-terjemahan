@@ -11,6 +11,9 @@ dependencies:
   '@astrojs/tailwind':
     specifier: ^5.0.0
     version: 5.0.0(astro@3.0.12)(tailwindcss@3.3.2)
+  '@preline/overlay':
+    specifier: ^1.4.0
+    version: 1.4.0
   '@supabase/supabase-js':
     specifier: ^2.26.0
     version: 2.26.0
@@ -29,6 +32,9 @@ dependencies:
   nanostores:
     specifier: ^0.9.3
     version: 0.9.3
+  preline:
+    specifier: ^1.9.0
+    version: 1.9.0
   sweetalert2:
     specifier: ^11.7.12
     version: 11.7.12
@@ -808,6 +814,14 @@ packages:
     dependencies:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.15.0
+    dev: false
+
+  /@popperjs/core@2.11.8:
+    resolution: {integrity: sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==}
+    dev: false
+
+  /@preline/overlay@1.4.0:
+    resolution: {integrity: sha512-K3Ybp1jGkonimWIlS986Lzz/4ezuYNqQNTK2ZS0tDka69hzutA10CraAeflEHG2A1n7EzWkZE1vjLuy7s7pgjg==}
     dev: false
 
   /@supabase/functions-js@2.1.2:
@@ -3006,6 +3020,12 @@ packages:
       find-yarn-workspace-root2: 1.2.16
       path-exists: 4.0.0
       which-pm: 2.0.0
+    dev: false
+
+  /preline@1.9.0:
+    resolution: {integrity: sha512-zvOexsDBood9gBAQYSwz7iY8TaomtRD0/qxvCnJl3caq5pif6frl8Oe4b4DsxHHD3Clzl4I5RmVKTq9XjMvNJA==}
+    dependencies:
+      '@popperjs/core': 2.11.8
     dev: false
 
   /prismjs@1.29.0:

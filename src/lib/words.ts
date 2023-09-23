@@ -2,38 +2,38 @@ import { supabase } from "./supabase";
 
 // Interface untuk mendefinisikan struktur item hasil.
 export interface ResultItem {
-  mooi_kata: string;
-  mooi_lafal: string;
-  mooi_arti: string;
-  mooi_contoh: string;
+  kata: string;
+  lafal: string;
+  arti: string;
+  contoh_asal: string;
+  contoh_terjemahan: string;
   kelas_kata: string;
-  indo_kata: string;
-  indo_contoh: string;
 }
 
+
 /**
- * Mengambil data dari tabel kata_mooi dan kata_indonesia, kemudian menggabungkannya.
+ * Mengambil data dari tabel kosakata
+ * @param {number} lang_id - Number untuk memfilter bahasa asal dalam tabel bahasa.
  * @returns {Promise<ResultItem[] | null>} Array dari objek ResultItem atau null jika terjadi kesalahan.
  */
-export async function fetchData(): Promise<ResultItem[] | null> {
-  // Mengambil data dari tabel kata_indonesia.
-  const { data: indoData, error: indoError } = await supabase
-    .from("kata_indonesia")
-    .select("id, kata, contoh, kata_mooi_id (kata, lafal, arti, contoh, kelas_kata_id (nama))");
+export async function fetchData(lang_id: number): Promise<ResultItem[] | null> {
+  // Mengambil data dari tabel kosakata.
+  const { data: itemData, error: itemError } = await supabase
+    .from("kosakata")
+    .select("kata, lafal, arti, contoh_asal, contoh_terjemahan, id_bahasa, id_kelas_kata")
+    .eq("id_bahasa", lang_id)
 
-  if (indoData) {
+  if (itemData) {
     // Menggabungkan data dari kata_mooi dan kata_indonesia.
-    const result: ResultItem[] = indoData.map(
-      (indoItem: any, index: number) => {
+    const result: ResultItem[] = itemData.map(
+      (item: any) => {
         return {
-          id: indoItem.id,
-          mooi_kata: indoItem.kata_mooi_id.kata,
-          mooi_lafal: indoItem.kata_mooi_id.lafal,
-          mooi_arti: indoItem.kata_mooi_id.arti,
-          mooi_contoh: indoItem.kata_mooi_id.contoh,
-          kelas_kata: indoItem.kata_mooi_id.kelas_kata_id.nama,
-          indo_kata: indoItem.kata,
-          indo_contoh: indoItem.contoh,
+          kata: item.kata,
+          lafal: item.lafal,
+          arti: item.arti,
+          contoh_asal: item.contoh_asal,
+          contoh_terjemahan: item.contoh_terjemahan,
+          kelas_kata: item.id_kelas_kata,
         };
 
       }
@@ -46,34 +46,34 @@ export async function fetchData(): Promise<ResultItem[] | null> {
   }
 }
 
+
 /**
- * Mengambil data dari tabel kata_mooi berdasarkan filter, kemudian menggabungkannya dengan data dari tabel kata_indonesia.
- * @param {string} filter - String untuk memfilter kata dalam tabel kata_mooi.
+ * Mengambil data dari tabel kosakata berdasarkan filter
+ * @param {string} filter - String untuk memfilter kata dalam tabel kosakata.
+ * @param {number} lang_id - Number untuk memfilter bahasa asal dalam tabel bahasa.
  * @returns {Promise<ResultItem[] | null>} Array dari objek ResultItem atau null jika terjadi kesalahan.
  */
-export async function fetchFilteredData(filter: string): Promise<ResultItem[] | null> {
-  // Mengambil data dari tabel kata_indonesia.
-  const { data: filterIndoData, error: indoError } = await supabase
-    .from("kata_indonesia")
-    .select("kata, contoh, kata_mooi_id!inner(kata, lafal, arti, contoh, kelas_kata_id (nama))")
-    .ilike("kata_mooi_id.kata", `${filter}%`);
+export async function fetchFilteredData(filter: string, lang_id: number): Promise<ResultItem[] | null> {
+  // Mengambil data dari tabel kosakata.
+  const { data: itemData, error: itemError } = await supabase
+    .from("kosakata")
+    .select("kata, lafal, arti, contoh_asal, contoh_terjemahan, id_bahasa, id_kelas_kata")
+    .eq("id_bahasa", lang_id)
+    .ilike("kata", `${filter}%`);
 
-
-  if (filterIndoData) {
-    return filterIndoData.map((indoItem: any) => {
-      return {        
-        mooi_kata: indoItem.kata_mooi_id.kata,
-        mooi_lafal: indoItem.kata_mooi_id.lafal,
-        mooi_arti: indoItem.kata_mooi_id.arti,
-        mooi_contoh: indoItem.kata_mooi_id.contoh,
-        kelas_kata: indoItem.kata_mooi_id.kelas_kata_id.nama,
-        indo_kata: indoItem.kata,
-        indo_contoh: indoItem.contoh,
+  if (itemData) {
+    return itemData.map((item: any) => {
+      return {
+        kata: item.kata,
+        lafal: item.lafal,
+        arti: item.arti,
+        contoh_asal: item.contoh_asal,
+        contoh_terjemahan: item.contoh_terjemahan,
+        kelas_kata: item.id_kelas_kata,
       };
     });
 
   } else {
-    console.error("Data is null");
     return null;
   }
 }

@@ -13,11 +13,11 @@ export async function handleSubmit(event: Event) {
     "message"
   ) as HTMLTextAreaElement;
   const message = messageElement.value;
-
+  
   // Memasukkan feedback ke dalam database
   const { data, error } = await supabase
     .from("feedback")
-    .insert([{ message: message, created_at: new Date().toISOString() }]);
+    .insert([{ message: message }]);
 
   // Menangani respons dari database
   if (error) {
@@ -32,7 +32,7 @@ export async function handleSubmit(event: Event) {
       () => {
         // Menutup modal setelah feedback berhasil dikirim
         const closeModalButton = document.querySelector(
-          '[data-modal-hide="feedback-modal"]'
+          '[data-hs-overlay="#feedback-modal"]'
         );
         if (closeModalButton) {
           closeModalButton.dispatchEvent(new MouseEvent("click"));

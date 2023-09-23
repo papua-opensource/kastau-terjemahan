@@ -2,26 +2,32 @@
 import Layout from "../layouts/Layout.astro";
 import VocabularyList from "../components/Vocabulary/VocabularyList.astro";
 import VocabularyModal from "../components/Vocabulary/VocabularyModal.astro";
-import { ResultItem, fetchFilteredData } from "../lib/words";
-import { fetchedData } from "../lib/store";
-
-// const data = await fetchFilteredData("A");
-let data: ResultItem[] = [];
-fetchedData.subscribe((value) => {
-  data = [...value];
-});
 ---
 
-<Layout title="Kosa kata • Kamus Bahasa Moy">
+<Layout title="Kosa kata • Kastau Terjemahan">
   <main>
     <section
       class="z-10 before:absolute before:z-0 before:h-24 before:w-full before:border-b before:border-gray-200 before:bg-gray-50 before:content-['']"
     >
-      <div class="mx-auto max-w-screen-xl px-2 lg:px-36">
-        <div class="flex flex-row">
-          <div class="top-32 z-10 w-full py-14">
+      <div class="mx-auto max-w-screen-lg">
+        <div class="flex flex-col px-4 lg:px-0">
+          <div
+            class="grid grid-cols-1 gap-4 top-32 z-10 pt-4 lg:grid-cols-3 lg:gap-8"
+          >
+            <div class="">
+              <select
+                id="selectLang"
+                class="py-3 px-4 pr-9 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500"
+              >
+                <option value="2">Bahasa Mooi</option>
+                <option value="1">Bahasa Sentani</option>
+              </select>
+            </div>
+            <div class="lg:col-span-2"></div>
+          </div>
+          <div class="w-full z-10 -mt-3 lg:-mt-0">
             <div
-              class="grid grid-cols-1 gap-4 rounded border bg-white p-4 lg:grid-cols-[120px_1fr] lg:gap-8"
+              class="grid grid-cols-1 gap-4 rounded border bg-white p-4 mt-3 lg:grid-cols-[120px_1fr] lg:gap-8"
             >
               <div class="h-auto lg:border-r">
                 <div class="my-4 border-b pb-4">
@@ -34,49 +40,15 @@ fetchedData.subscribe((value) => {
                 </ul>
               </div>
               <div class="h-auto">
-                <VocabularyList items={data} />
+                <VocabularyList />
               </div>
             </div>
           </div>
         </div>
       </div>
     </section>
-    <VocabularyModal items={data} />
+    <div id="vocabModal"></div>
   </main>
 </Layout>
 
-<script>
-  import { displayDataForLetter } from "../lib/vocabulary";
-
-  // // Mendapatkan referensi elemen-elemen utama
-  const letterList = document.getElementById("letterList") as HTMLUListElement;
-  const titleAbjad = document.getElementById("titleAbjad") as HTMLSpanElement;
-
-  // Melakukan iterasi melalui nilai ASCII untuk huruf A-Z
-  for (let i = 65; i <= 90; i++) {
-    const letter = String.fromCharCode(i);
-    const li = document.createElement("li");
-    li.className =
-      "text-center cursor-pointer font-sofia px-3 py-2 text-xl text-gray-500 hover:text-gray-700 hover:bg-gray-100 hover:rounded";
-    li.textContent = letter;
-
-    // Menambahkan event listener ke elemen li
-    li.addEventListener("click", () => {
-      // Menghapus kelas yang dipilih dari semua elemen li
-      const allLiElements = letterList?.querySelectorAll("li");
-      allLiElements?.forEach((el) => el.classList.remove("bg-gray-100"));
-
-      // Menambahkan kelas yang dipilih ke elemen li yang diklik
-      li.classList.add("bg-gray-100");
-
-      // Memperbarui konten titleAbjad
-      titleAbjad.textContent = letter;
-
-      displayDataForLetter(letter);
-    });
-
-    letterList?.appendChild(li);
-    // Menyorot elemen li pertama (huruf "A") secara default
-    letterList?.firstElementChild?.classList.add("bg-gray-100");
-  }
-</script>
+<script src="../lib/vocabulary.ts"></script>

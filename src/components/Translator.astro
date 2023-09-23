@@ -1,0 +1,80 @@
+<div class="flex justify-between bg-white rounded-t-xl">
+  <div
+    class="flex-1 w-32 items-end pt-3 px-8 text-center border-t border-l rounded-tl-xl"
+  >
+    <select
+      id="sourceLangId"
+      class="block w-auto sm:w-full rounded-md text-center pt-1 -ml-3 lg:-ml-0 text-base font-inter font-medium text-gray-600 capitalize appearance-none border-none focus:border-none focus:outline-none focus:ring-0"
+      style="background:none"
+    >
+      <option value="3">Indonesia</option>
+    </select>
+  </div>
+  <div class="flex-none border-t py-1.5">
+    <div class="flex items-center justify-center">
+      <button
+        id="switch-button"
+        class="hover:bg-gray-100 text-gray-500 pl-2.5 rounded-full w-10 h-10 mt-1 transition-colors duration-100"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-5 h-5"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5"
+          ></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div
+    class="flex-1 w-32 items-center pt-3 px-8 text-center border-t border-r rounded-tr-xl"
+  >
+    <select
+      id="targetLangId"
+      class="block w-auto sm:w-full rounded-md text-center pt-1 -ml-3 lg:-ml-0 text-base font-inter font-medium text-gray-600 capitalize appearance-none border-none focus:border-none focus:outline-none focus:ring-0"
+      style="background:none"
+    >
+      <option value="1">Mooi</option>
+      <option value="2">Sentani</option>
+    </select>
+  </div>
+</div>
+
+<div class="flex flex-col sm:flex-row">
+  <div
+    class="w-full sm:mb-4 border-t border-b border-l border-r sm:border-r-0 sm:rounded-bl-lg"
+  >
+    <div id="sourceWord" class="px-6 md:px-8 py-4">
+      <div class="overflow-hidden">
+        <textarea
+          class="w-full resize-none border-0 border-gray-200 px-0 align-top text-sm sm:text-base font-inter"
+          rows="5"
+          placeholder="Masukan kata..."
+          autofocus></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="w-full mb-4 border border-t-0 sm:border-t sm:rounded-br-lg">
+    <div id="targetWord" class="px-6 md:px-8 py-4">
+      <div class="overflow-hidden">
+        <textarea
+          rows="5"
+          class="w-full resize-none border-x-0 border-y-0 px-0 align-top text-sm sm:text-base font-inter"
+          placeholder="Terjemahan"
+          readonly></textarea>
+      </div>
+
+      <div class="flex flex-col pb-2"></div>
+    </div>
+  </div>
+</div>
+
+<script src="../lib/translator.ts"></script>

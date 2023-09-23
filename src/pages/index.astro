@@ -1,0 +1,48 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Translator from "../components/Translator.astro";
+import FeedbackModal from "../components/FeedbackModal.astro";
+---
+
+<Layout title="Beranda • Kastau Terjemahan">
+  <main>
+    <section
+      class="before:content-[''] before:bg-gray-50 before:h-24 before:w-full before:absolute before:border-b before:border-gray-200 before:z-0 z-10"
+    >
+      <div class="max-w-screen-xl mx-auto px-2 lg:px-36">
+        <div class="flex flex-row">
+          <div class="py-14 top-32 h z-10 w-full">
+            <Translator />
+            <div
+              id="related-words-container"
+              class="w-full rounded-lg border p-4 md:w-[50%] md:p-6 hidden"
+            >
+              <h2 class="font-inter font-medium text-gray-900">
+                Kosakata terkait
+              </h2>
+
+              <ul
+                id="results"
+                class="my-4 flex flex-col divide-y divide-gray-200"
+              >
+              </ul>
+            </div>
+
+            <div class="px-2 pt-3">
+              <span
+                data-hs-overlay="#feedback-modal"
+                class="font-inter cursor-pointer text-sm text-gray-500 underline"
+              >
+                Berikan saran
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div id="vocabModal"></div>
+    <FeedbackModal />
+  </main>
+</Layout>
+
+<script src="../lib/feedback.ts"></script>

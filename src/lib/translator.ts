@@ -234,7 +234,7 @@ function displayList(
         <span class="font-medium">${item.kata}</span>
         <span class="font-inter pt-0.5 text-sm text-gray-500">${item.arti}</span>
         </div>
-        <div class="font-inter pt-0.5 text-sm text-gray-500">${item.kelas_kata}</div>
+        <div class="font-inter pt-0.5 text-sm text-gray-500">${item.kelas_kata.replace(/^./, str => str.toUpperCase())}</div>
       `
     } else if (item) {
       listItem.innerHTML = `
@@ -242,7 +242,7 @@ function displayList(
         <span class="font-medium">${item.arti}</span>
         <span class="font-inter pt-0.5 text-sm text-gray-500">${item.kata}</span>
         </div>
-        <div class="font-inter pt-0.5 text-sm text-gray-500">${item.kelas_kata}</div>
+        <div class="font-inter pt-0.5 text-sm text-gray-500">${item.kelas_kata.replace(/^./, str => str.toUpperCase())}</div>
       `
     }
     element.appendChild(listItem);

@@ -20,7 +20,7 @@ export async function fetchData(lang_id: number): Promise<ResultItem[] | null> {
   // Mengambil data dari tabel kosakata.
   const { data: itemData, error: itemError } = await supabase
     .from("kosakata")
-    .select("kata, lafal, arti, contoh_asal, contoh_terjemahan, id_bahasa, id_kelas_kata")
+    .select("kata, lafal, arti, contoh_asal, contoh_terjemahan, id_bahasa, id_kelas_kata (nama)")
     .eq("id_bahasa", lang_id)
 
   if (itemData) {
@@ -33,7 +33,7 @@ export async function fetchData(lang_id: number): Promise<ResultItem[] | null> {
           arti: item.arti,
           contoh_asal: item.contoh_asal,
           contoh_terjemahan: item.contoh_terjemahan,
-          kelas_kata: item.id_kelas_kata,
+          kelas_kata: item.id_kelas_kata.nama,
         };
 
       }

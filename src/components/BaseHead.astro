@@ -7,8 +7,8 @@ export interface Props {
 
 const {
   title,
-  description = "Proyek ini adalah sebuah inisiatif sukarela yang berdedikasi untuk pelestarian dan pengembangan bahasa daerah Moy. Kami yakin bahwa setiap bahasa merupakan cerminan dari suatu budaya, sebuah warisan yang layak untuk dijaga dan dikembangkan. Bahasa Mooi, sebagai bagian integral dari warisan budaya, layak mendapatkan perhatian dan pengakuan yang sama. ",
-  image = '/preview.png'
+  description = "Proyek ini adalah sebuah inisiatif sukarela yang bertujuan untuk secara komprehensif mendokumentasikan semua bahasa daerah yang ada di Papua. Kami berkomitmen untuk mencapai tujuan ini melalui kolaborasi berdasarkan semangat open source.",
+  image = "/preview.png",
 } = Astro.props;
 ---
 
@@ -38,4 +38,7 @@ const {
 <meta property="twitter:image" content={new URL(image, Astro.url)} />
 
 <link rel="preconnect" href="https://fonts.bunny.net" />
-<link href="https://fonts.bunny.net/css?family=diplomata:400|inter:400,500,600,700,800|sofia-sans:500,600,700,800" rel="stylesheet" />
+<link
+  href="https://fonts.bunny.net/css?family=diplomata:400|inter:400,500,600,700,800|sofia-sans:500,600,700,800"
+  rel="stylesheet"
+/>

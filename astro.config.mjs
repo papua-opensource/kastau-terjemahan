@@ -4,6 +4,6 @@ import alpinejs from "@astrojs/alpinejs";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://antroy-tech.github.io/kastau-terjemahan/",
+  site: "https://kamus.antroytech.my.id/",
   integrations: [tailwind(), alpinejs()]
 });

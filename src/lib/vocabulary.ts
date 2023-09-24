@@ -140,7 +140,7 @@ async function displayDataForLetter(letter: string, lang_id: number) {
     }
 }
 
-// Fungsi wrapper untuk Astro frontmatter
+// TODO: Fungsi wrapper untuk Astro frontmatter
 // export async function displayDataForSelectedLetter() {
 //     const selectedLetter = titleAlphabet.textContent || 'A';
 //     const selectedLang = parseInt(langID.value);

@@ -76,12 +76,12 @@ async function translate(): Promise<void> {
       const sourceToTargetMatch = (
         (sourceLang === 1 && targetLang === 3) ||
         (sourceLang === 2 && targetLang === 3)
-      ) && item.kata.toLowerCase().startsWith(query);
+      ) && item.kata.toLowerCase().includes(query);
 
       const targetToSourceMatch = (
         (sourceLang === 3 && targetLang === 1) ||
         (sourceLang === 3 && targetLang === 2)
-      ) && item.arti.toLowerCase().startsWith(query);
+      ) && item.arti.toLowerCase().includes(query);
 
       return sourceToTargetMatch || targetToSourceMatch;
     });
@@ -194,7 +194,7 @@ async function translate(): Promise<void> {
               </div>
             `
     vocabularyModal.appendChild(modalDiv)
-    
+
     // Tampilkan semua hasil di kontainer hasil
     displayResults(results, sourceLang!);
   } catch (error) {

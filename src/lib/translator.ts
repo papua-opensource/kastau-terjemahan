@@ -66,7 +66,7 @@ async function translate(): Promise<void> {
   }
 
   try {
-    const data = await fetchData(sourceLang === 3 ? targetLang : sourceLang);
+    const data = await fetchData(sourceLang === 1 ? targetLang : sourceLang);
 
     if (!data) {
       throw new Error("Failed to fetch data from fetchData");
@@ -74,15 +74,15 @@ async function translate(): Promise<void> {
 
     const results = data.filter((item: ResultItem) => {
       const sourceToTargetMatch = (
-        (sourceLang === 1 && targetLang === 3) ||
-        (sourceLang === 2 && targetLang === 3)
+        (sourceLang === 2 && targetLang === 1) ||
+        (sourceLang === 3 && targetLang === 1)
       ) && item.kata.toLowerCase().includes(query);
 
       const targetToSourceMatch = (
-        (sourceLang === 3 && targetLang === 1) ||
-        (sourceLang === 3 && targetLang === 2)
+        (sourceLang === 1 && targetLang === 2) ||
+        (sourceLang === 1 && targetLang === 3)
       ) && item.arti.toLowerCase().includes(query);
-
+      
       return sourceToTargetMatch || targetToSourceMatch;
     });
 
@@ -96,7 +96,7 @@ async function translate(): Promise<void> {
 
     // Tampilkan hasil pertama di area teks tujuan
     targetTextArea.value =
-      sourceLang === 1 || sourceLang == 2
+      sourceLang === 2 || sourceLang == 3
         ? `${results[0].arti}`
         : `${results[0].kata}`;
 
@@ -228,7 +228,7 @@ function displayList(
     listItem.className =
       "flex justify-between gap-x-6 py-3 pl-2 text-base font-normal text-gray-800 md:pl-2";
 
-    if (sourceLang === 1 || sourceLang == 2 && item) {
+    if (sourceLang === 2 || sourceLang == 3 && item) {
       listItem.innerHTML = `
       <div class="inline-flex gap-x-4">
         <span class="font-medium">${item.kata}</span>

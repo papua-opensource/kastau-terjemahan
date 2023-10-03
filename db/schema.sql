@@ -126,6 +126,7 @@ ALTER TABLE ONLY "public"."kosakata"
 CREATE POLICY "Enable insert for authenticated users only" ON "public"."feedback" FOR INSERT TO "anon" WITH CHECK (true);
 
 CREATE POLICY "Enable read access for all users" ON "public"."kosakata" FOR SELECT TO "anon" USING (true);
+CREATE POLICY "Enable read access for all users" ON "public"."kelas_kata" FOR SELECT TO "anon" USING (true);
 
 ALTER TABLE "public"."bahasa" ENABLE ROW LEVEL SECURITY;
 

@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+import logo from "../assets/logo.png"; // Image is 1600x900
 const currentPath = Astro.url.pathname;
 ---
 
@@ -10,11 +12,13 @@ const currentPath = Astro.url.pathname;
     class="max-w-screen-lg py-4 px-4 mx-auto md:px-6 lg:px-0 md:flex md:justify-between"
   >
     <div class="flex items-center justify-between md:justify-normal">
-      <a
-        href="/"
-        class="text-base font-inter font-medium text-center capitalize"
-      >
-        Kastau Terjemahan
+      <a href="/" class="inline-flex gap-2">
+        <Image
+          class="w-auto h-6 sm:h-7"
+          src={logo}
+          alt=""
+        />
+        <span class="font-inter pt-0.5 text-center text-base font-medium capitalize">Kastau Terjemahan</span>
       </a>
 
       <!-- Mobile menu button -->

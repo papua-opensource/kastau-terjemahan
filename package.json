@@ -19,6 +19,7 @@
     "alpinejs": "^3.13.0",
     "astro": "^3.0.12",
     "preline": "^1.9.0",
+    "sharp": "^0.32.6",
     "sweetalert2": "^11.7.12"
   },
   "devDependencies": {

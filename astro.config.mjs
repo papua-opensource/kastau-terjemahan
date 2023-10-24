@@ -5,7 +5,8 @@ import tailwind from "@astrojs/tailwind";
 
 // https://astro.build/config
 export default defineConfig({
-	site: "https://antroy-tech.github.io/kastau-terjemahan",
+	site: "https://antroy-tech.github.io",
+	base: '/kastau-terjemahan',
 	integrations: [starlight({
 		title: 'Kastau Terjemahan',
 		logo: {

@@ -1,6 +1,5 @@
 import { supabase } from "./supabase";
 
-// Interface untuk mendefinisikan struktur item hasil.
 export interface ResultItem {
   kata: string;
   lafal: string;
@@ -11,68 +10,83 @@ export interface ResultItem {
 }
 
 
+export interface ResultLyricItem {
+  judul: string;
+  lirik_asal: string;
+  lirik_terjemahan: string;
+}
+
 /**
- * Mengambil data dari tabel kosakata
- * @param {number} lang_id - Number untuk memfilter bahasa asal dalam tabel bahasa.
+ * Mengambil data dari tabel kosakata berdasarkan bahasa asal.
+ * @param {number} lang_id - ID bahasa asal yang akan diambil.
  * @returns {Promise<ResultItem[] | null>} Array dari objek ResultItem atau null jika terjadi kesalahan.
  */
-export async function fetchData(lang_id: number): Promise<ResultItem[] | null> {
-  // Mengambil data dari tabel kosakata.
-  const { data: itemData, error: itemError } = await supabase
+export async function fetchVocabularyData(lang_id: number): Promise<ResultItem[] | null> {
+  const { data, error } = await supabase
     .from("kosakata")
-    .select("kata, lafal, arti, contoh_asal, contoh_terjemahan, id_bahasa, id_kelas_kata (nama)")
-    .eq("id_bahasa", lang_id)
+    .select("kata, lafal, arti, contoh_asal, contoh_terjemahan, id_kelas_kata (nama)")
+    .eq("id_bahasa", lang_id);
 
-  if (itemData) {
-    // Menggabungkan data dari kata_mooi dan kata_indonesia.
-    const result: ResultItem[] = itemData.map(
-      (item: any) => {
-        return {
-          kata: item.kata,
-          lafal: item.lafal,
-          arti: item.arti,
-          contoh_asal: item.contoh_asal,
-          contoh_terjemahan: item.contoh_terjemahan,
-          kelas_kata: item.id_kelas_kata.nama,
-        };
-
-      }
-    );
-
-    return result;
+  if (data) {
+    return data.map((item: any) => ({
+      kata: item.kata,
+      lafal: item.lafal,
+      arti: item.arti,
+      contoh_asal: item.contoh_asal,
+      contoh_terjemahan: item.contoh_terjemahan,
+      kelas_kata: item.id_kelas_kata.nama,
+    }));
   } else {
     console.error("Data is null");
     return null;
   }
 }
 
-
 /**
- * Mengambil data dari tabel kosakata berdasarkan filter
+ * Mengambil data dari tabel kosakata berdasarkan filter kata.
  * @param {string} filter - String untuk memfilter kata dalam tabel kosakata.
- * @param {number} lang_id - Number untuk memfilter bahasa asal dalam tabel bahasa.
+ * @param {number} lang_id - ID bahasa asal yang akan diambil.
  * @returns {Promise<ResultItem[] | null>} Array dari objek ResultItem atau null jika terjadi kesalahan.
  */
-export async function fetchFilteredData(filter: string, lang_id: number): Promise<ResultItem[] | null> {
-  // Mengambil data dari tabel kosakata.
-  const { data: itemData, error: itemError } = await supabase
+export async function fetchFilteredVocabulary(filter: string, lang_id: number): Promise<ResultItem[] | null> {
+  const { data, error } = await supabase
     .from("kosakata")
-    .select("kata, lafal, arti, contoh_asal, contoh_terjemahan, id_bahasa, id_kelas_kata")
+    .select("kata, lafal, arti, contoh_asal, contoh_terjemahan, id_kelas_kata")
     .eq("id_bahasa", lang_id)
     .ilike("kata", `${filter}%`);
 
-  if (itemData) {
-    return itemData.map((item: any) => {
-      return {
-        kata: item.kata,
-        lafal: item.lafal,
-        arti: item.arti,
-        contoh_asal: item.contoh_asal,
-        contoh_terjemahan: item.contoh_terjemahan,
-        kelas_kata: item.id_kelas_kata,
-      };
-    });
+  if (data) {
+    return data.map((item: any) => ({
+      kata: item.kata,
+      lafal: item.lafal,
+      arti: item.arti,
+      contoh_asal: item.contoh_asal,
+      contoh_terjemahan: item.contoh_terjemahan,
+      kelas_kata: item.id_kelas_kata,
+    }));
+  } else {
+    return null;
+  }
+}
 
+/**
+ * Mengambil data dari tabel lirik lagu.
+ * @param {string} filter - String untuk memfilter kata dalam tabel lirik_lagu.
+ * @returns {Promise<ResultLyricItem[] | null>} Array dari objek ResultLyricItem atau null jika terjadi kesalahan.
+ */
+export async function fetchFilteredLyric(filter: string): Promise<ResultLyricItem[] | null> {
+  const { data, error } = await supabase
+    .from("lirik_lagu")
+    .select("judul, lirik_asal, lirik_terjemahan")
+    .ilike("judul", `${filter}%`)
+    .order('judul', { ascending: true });
+
+  if (data) {
+    return data.map((item: any) => ({
+      judul: item.judul,
+      lirik_asal: item.lirik_asal,
+      lirik_terjemahan: item.lirik_terjemahan,
+    }));
   } else {
     return null;
   }

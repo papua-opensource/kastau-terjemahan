@@ -1,4 +1,4 @@
-import { fetchData, type ResultItem } from "./words";
+import { fetchVocabularyData, type ResultItem } from "./words";
 
 // Mendapatkan referensi elemen-elemen HTML yang akan digunakan
 const sourceLangElement = document.getElementById("sourceLangId") as HTMLSelectElement;
@@ -66,7 +66,7 @@ async function translate(): Promise<void> {
   }
 
   try {
-    const data = await fetchData(sourceLang === 1 ? targetLang : sourceLang);
+    const data = await fetchVocabularyData(sourceLang === 1 ? targetLang : sourceLang);
 
     if (!data) {
       throw new Error("Failed to fetch data from fetchData");
@@ -155,7 +155,7 @@ async function translate(): Promise<void> {
                   <h3
                       class="text-gray-900 text-sm font-inter font-semibold"
                   >
-                      ${sourceLang === 1 ? `Kalimat Mooi` : `Kalimat Sentani`}
+                      ${sourceLang === 0 ? `Kalimat Mooi` : `Kalimat Sentani`}
                   </h3>
                   <p
                       class="text-lg font-inter leading-relaxed text-gray-500"

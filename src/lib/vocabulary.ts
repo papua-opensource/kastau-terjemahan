@@ -1,4 +1,4 @@
-import { fetchFilteredData } from "./words";
+import { fetchFilteredVocabulary } from "./words";
 
 
 const langID = document.getElementById("selectLang") as HTMLSelectElement;
@@ -11,7 +11,7 @@ async function displayDataForLetter(letter: string, lang_id: number) {
     listVocab.innerHTML = "";
     vocabularyModal.innerHTML = "";
 
-    const data = await fetchFilteredData(letter, lang_id);
+    const data = await fetchFilteredVocabulary(letter, lang_id);
     if (data && data.length > 0) {
         data.forEach((item, index) => {
             // Buat id dinamis

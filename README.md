@@ -53,7 +53,7 @@ Pastikan Anda telah menginstal [Node.js](https://nodejs.org/).
    pnpm run dev
    ```
 
-Buka `http://localhost:3000` di peramban Anda.
+Buka `http://localhost:4321` di peramban Anda.
 
 ## Cara Berkontribusi
 

@@ -1,0 +1,73 @@
+---
+import Layout from "../layouts/Layout.astro";
+import LyricList from "../components/Lyrics/LyricList.astro";
+---
+
+<Layout title="Lagu Bahasa Daerah Papua • Kastau Terjemahan">
+  <main>
+    <section
+      class="z-10 before:absolute before:z-0 before:h-24 before:w-full before:border-b before:border-gray-200 before:bg-gray-50 before:content-['']"
+    >
+      <div class="mx-auto max-w-screen-lg">
+        <div class="flex flex-col px-4 lg:px-0">
+          <div class="top-32 z-10 grid grid-cols-1 gap-4 pt-4 lg:gap-8">
+            <label for="inputLyric" class="sr-only">Pencarian</label>
+            <div class="relative">
+              <div
+                class="pointer-events-none absolute inset-y-0 left-0 z-20 flex items-center pl-4"
+              >
+                <svg
+                  class="h-4 w-4 text-gray-500"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"
+                  ></path>
+                </svg>
+              </div>
+              <input
+                type="text"
+                id="inputLyric"
+                class="block w-full md:w-2/5 rounded-md border-gray-200 px-4 py-3 pl-11 pr-20 text-sm focus:border-blue-500 focus:ring-blue-500"
+                placeholder="Cari judul lagu..."
+              />
+            </div>
+          </div>
+          <div class="z-10 w-full">
+            <section class="mt-3 rounded border bg-white text-gray-800">
+              <LyricList />
+            </section>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div id="lyricModal"></div>
+  </main>
+</Layout>
+
+<script src="../lib/lyrics.ts"></script>
+
+<!-- 
+  Foi moi sele Tuhan ware wayete
+  Onomi fokha mei waline yeyama
+  Nebeinye Tuhan Mea
+  Ware bhuma kholayete
+  Mei wali einye Tuhan Nekhewende
+  
+  Mei Khena u wei einyemo nekhemande
+  Mei Hole einye khukuimeme nekhemande
+  Bulo fela hugalo uhele nekhemande
+  Mei wali einye Tuhan Nekhewende
+  
+  Tuhan ei rime a waremo
+  Tuhan wembaisele mei rabo
+  Wei einyemo meya nekhemande benenfonde mele
+ -->
+
+<!-- Baris 1 lirik terjemahan bahasa Indonesia
+Baris 2 lirik terjemahan bahasa Indonesia
+Baris 3 lirik terjemahan bahasa Indonesia -->

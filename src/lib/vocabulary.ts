@@ -73,7 +73,7 @@ async function displayDataForLetter(letter: string, lang_id: number) {
                         </svg>
                         </button>
                     </div>                
-                    <div class="p-6 space-y-2">
+                    <div class="px-6 py-4 space-y-2">
                     ${item.contoh_asal && item.contoh_terjemahan ? `
                         <h3
                             class="text-blue-500 font-inter font-semibold"
@@ -84,7 +84,7 @@ async function displayDataForLetter(letter: string, lang_id: number) {
                             <h3
                                 class="text-gray-900 text-sm font-inter font-semibold"
                             >
-                                ${lang_id === 1 ? `Kalimat Mooi` : `Kalimat Sentani`}
+                                ${lang_id === 2 ? `Kalimat Mooi` : `Kalimat Sentani`}
                             </h3>
                             <p
                                 class="text-lg font-inter leading-relaxed text-gray-500"
@@ -106,7 +106,7 @@ async function displayDataForLetter(letter: string, lang_id: number) {
                         </div>
                     `
                     : `
-                        <p class="text-base italic font-inter leading-relaxed text-gray-500">
+                        <p class="text-base font-inter leading-relaxed text-gray-500">
                             Mohon maaf, contoh penggunaan untuk kosa kata ini belum tersedia.
                             <br>
                             Ingin kontribusi? <a href="/contribution" target="_blank" class="text-blue-600 underline">baca panduan

@@ -70,19 +70,19 @@ import logo from "../assets/logo.png"; // Image is 1600x900
     >
       <div class="flex flex-col md:flex-row gap-x-6">
         <a
-          :class="currentPath === '/vocabulary' ? 'border-b border-gray-400' : 'border-none'"
+          :class="currentPath === '/vocabulary/' ? 'border-b border-gray-400' : 'border-none'"
           class="my-2 font-inter transition-colors duration-300 transform hover:text-gray-500 md:my-0"
-          href="/vocabulary">Kosakata</a
+          href="/vocabulary/">Kosakata</a
         >
         <a
-          :class="currentPath === '/folk-songs' ? 'border-b border-gray-400' : 'border-none'"
+          :class="currentPath === '/songs/' ? 'border-b border-gray-400' : 'border-none'"
           class="my-2 font-inter transition-colors duration-300 transform hover:text-gray-500 md:my-0"
-          href="/folk-songs">Lagu</a
+          href="/songs/">Lagu</a
         >
         <a
-          :class="currentPath === '/about' ? 'border-b border-gray-400' : 'border-none'"
+          :class="currentPath === '/about/' ? 'border-b border-gray-400' : 'border-none'"
           class="my-2 font-inter transition-colors duration-300 transform hover:text-gray-500 md:my-0"
-          href="/about">Tentang</a
+          href="/about/">Tentang</a
         >
       </div>
     </div>

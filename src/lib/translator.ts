@@ -155,7 +155,7 @@ async function translate(): Promise<void> {
                   <h3
                       class="text-gray-900 text-sm font-inter font-semibold"
                   >
-                      ${sourceLang === 0 ? `Kalimat Mooi` : `Kalimat Sentani`}
+                      ${targetLang === 2 ? `Kalimat Mooi` : `Kalimat Sentani`}
                   </h3>
                   <p
                       class="text-lg font-inter leading-relaxed text-gray-500"

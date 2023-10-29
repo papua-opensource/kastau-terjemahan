@@ -11,38 +11,28 @@ function capitalizeWord(input: string): string {
         .join(' ');
 }
 
-function combineLyrics(originalLyrics?: string, translation?: string): string {
-    const originalLines: string[] = (originalLyrics || '').trim().split('\n');
-    const translationLines: string[] = (translation || '').trim().split('\n');
+function displayLyrics(contentLyrics): string {
+    let trElement: string = '';
 
-    let combinedLyricsData: string = '';
+    contentLyrics.forEach((section: any) => {
+        if (section.jenis_bagian === "Verse") {
+            trElement += `
+                <tr class="flex space-x-4 my-3">
+                    <td class="text-gray-500 text-xl w-3">${section.urutan}</td>
+                    <td>${section.teks.replace(/\n/g, '<br />')}</td>
+                </tr>
+            `;
+        } else if (section.jenis_bagian === "Chorus") {
+            trElement += `
+                <tr class="flex flex-col pl-7 space-x-3">
+                    <td class="text-gray-500 w-8">Ref:</td>
+                    <td>${section.teks.replace(/\n/g, '<br />')}</td>
+                </tr>
+            `;
+        }
+    });
 
-    for (let i = 0; i < originalLines.length; i++) {
-        const originalLine = originalLines[i];
-        const translatedLine = translationLines[i];
-        const hasTranslation = translatedLine ? true : false;
-
-        combinedLyricsData += `
-            <p class="text-blue-500 font-semibold">
-                ${capitalizeWord(originalLine)}
-            </p>
-            ${hasTranslation ?
-                `
-                <p class="text-gray-500 text-sm">
-                    ${capitalizeWord(translatedLine)}
-                </p>
-                `
-                :
-                `
-                <p class="text-gray-500 text-sm italic">
-                    terjemahan belum tersedia
-                </p>
-                `
-            }
-        `;
-    }
-
-    return combinedLyricsData;
+    return trElement;
 }
 
 function createListItem(item: any, index: number): HTMLLIElement {
@@ -106,7 +96,7 @@ function createListItem(item: any, index: number): HTMLLIElement {
 function createModalDiv(item: any, index: number): HTMLDivElement {
     const dynamicId = `lyric-modal-${index}`;
     const modalDiv = document.createElement("div");
-    const combinedLyrics = combineLyrics(item.lirik_asal, item.lirik_terjemahan);
+    const showLyrics = displayLyrics(item.bagian);
     modalDiv.id = dynamicId;
     modalDiv.className = "hs-overlay hidden w-full h-full fixed top-0 left-0 z-[60] overflow-x-hidden overflow-y-auto [--overlay-backdrop:static]";
     modalDiv.innerHTML = `
@@ -140,23 +130,25 @@ function createModalDiv(item: any, index: number): HTMLDivElement {
             </div>
             <div class="p-4 overflow-y-auto">
                 <div class="space-y-4">
-                    <div class="grid grid-cols-1 gap-4 font-inter ml-5">
-                        ${item.lirik_asal || item.lirik_terjemahan ?
-            `
-                            <div class="flex flex-col gap-2">
-                                ${combinedLyrics}                                                        
-                            </div>
-                        `
-            :
-            `
-                            <p class="text-sn italic font-inter leading-relaxed text-gray-500">
-                                Mohon maaf, lirik untuk lagu ini belum tersedia.
-                                <br>
-                                Ingin kontribusi? <a href="/contribution" target="_blank" class="text-blue-600 underline">baca panduan
-                                    disini.</a>
-                            </p>
-                        `
-        }
+                    <div class="grid grid-cols-1 gap-4 font-inter ml-2">
+                        ${item.bagian.length > 0 ?
+                            `
+                                <table class="font-inter text-gray-500">
+                                    <tbody class="text-left">
+                                        ${showLyrics}
+                                    </tbody>
+                                </table> 
+                            `
+                        :
+                            `
+                                <p class="text-sn font-inter leading-relaxed text-gray-500">
+                                    Mohon maaf, lirik untuk lagu ini belum tersedia.
+                                    <br>
+                                    Ingin kontribusi? <a href="/contribution" target="_blank" class="text-blue-600 underline">baca panduan
+                                        disini.</a>
+                                </p>
+                            `
+                        }
                     </div>
                 </div>
             </div>
@@ -178,6 +170,8 @@ async function displayLyricData() {
 
     try {
         const data = (await fetchFilteredLyric(query));
+
+
 
         if (data.length > 0) {
             data.forEach((item, index) => {
@@ -205,7 +199,7 @@ async function displayLyricData() {
 }
 
 // Tambahkan event listener untuk input area teks dan klik tombol switch
-let debounceTimer;
+let debounceTimer: any;
 searchLyric.addEventListener("input", function () {
     clearTimeout(debounceTimer);
 

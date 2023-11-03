@@ -11,26 +11,33 @@ function capitalizeWord(input: string): string {
         .join(' ');
 }
 
-function displayLyrics(contentLyrics): string {
-    let trElement: string = '';
+function displayLyrics(contentLyrics: any): string {
+    // Urutkan array contentLyrics berdasarkan properti 'urutan'
+    contentLyrics.sort((a: { urutan: number; }, b: { urutan: number; }) => a.urutan - b.urutan);
 
-    contentLyrics.forEach((section: any) => {
+    let trElement = '';
+    let verseCount = 1;
+
+    contentLyrics.forEach((section) => {
         if (section.jenis_bagian === "Verse") {
             trElement += `
-                <tr class="flex space-x-4 my-3">
-                    <td class="text-gray-500 text-xl w-3">${section.urutan}</td>
-                    <td>${section.teks.replace(/\n/g, '<br />')}</td>
-                </tr>
-            `;
+            <tr class="flex space-x-4 my-3">
+                <td class="text-gray-500 text-xl w-3">${verseCount}</td>
+                <td>${section.teks.replace(/\n/g, '<br />')}</td>
+            </tr>
+        `;
+            verseCount++;
         } else if (section.jenis_bagian === "Chorus") {
             trElement += `
-                <tr class="flex flex-col pl-7 space-x-3">
-                    <td class="text-gray-500 w-8">Ref:</td>
-                    <td>${section.teks.replace(/\n/g, '<br />')}</td>
-                </tr>
-            `;
+            <tr class="flex flex-col pl-7 space-x-3">
+                <td class="text-gray-500 w-8">Ref:</td>
+                <td>${section.teks.replace(/\n/g, '<br />')}</td>
+            </tr>
+        `;
         }
     });
+
+
 
     return trElement;
 }
@@ -132,15 +139,15 @@ function createModalDiv(item: any, index: number): HTMLDivElement {
                 <div class="space-y-4">
                     <div class="grid grid-cols-1 gap-4 font-inter ml-2">
                         ${item.bagian.length > 0 ?
-                            `
+            `
                                 <table class="font-inter text-gray-500">
                                     <tbody class="text-left">
                                         ${showLyrics}
                                     </tbody>
                                 </table> 
                             `
-                        :
-                            `
+            :
+            `
                                 <p class="text-sn font-inter leading-relaxed text-gray-500">
                                     Mohon maaf, lirik untuk lagu ini belum tersedia.
                                     <br>
@@ -148,7 +155,7 @@ function createModalDiv(item: any, index: number): HTMLDivElement {
                                         disini.</a>
                                 </p>
                             `
-                        }
+        }
                     </div>
                 </div>
             </div>

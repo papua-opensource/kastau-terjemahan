@@ -20,9 +20,10 @@ Aplikasi "Kastau Terjemahan" memanfaatkan teknologi berikut:
 
 ## Fitur Utama
 
-- Terjemahan dari bahasa daerah Tanah Papua ke Bahasa Indonesia.
-- Antarmuka yang mudah digunakan.
-- Dukungan untuk penambahan bahasa daerah di masa mendatang.
+- [ ] Terjemahan dari bahasa daerah Tanah Papua ke Bahasa Indonesia.
+- [ ] Kumpulan lirik lagu bahasa daerah di Tanah Papua
+- [x] Antarmuka yang mudah digunakan.
+- [ ] Dukungan untuk penambahan kosakata dan lirik lagu bahasa daerah di masa mendatang.
 
 ## Mulai Cepat
 

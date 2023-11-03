@@ -144,7 +144,7 @@ async function translate(): Promise<void> {
               </svg>
               </button>
           </div>                
-          <div class="p-6 space-y-2">
+          <div class="px-6 py-4 space-y-2">
           ${results[0].contoh_asal && results[0].contoh_terjemahan ? `
               <h3
                   class="text-blue-500 font-inter font-semibold"
@@ -177,7 +177,7 @@ async function translate(): Promise<void> {
               </div>
           `
         : `
-              <p class="text-base italic font-inter leading-relaxed text-gray-500">
+              <p class="text-base font-inter leading-relaxed text-gray-500">
                   Mohon maaf, contoh penggunaan untuk kosa kata ini belum tersedia.
                   <br>
                   Ingin kontribusi? <a href="/contribution" target="_blank" class="text-blue-600 underline">baca panduan

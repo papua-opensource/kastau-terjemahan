@@ -46,6 +46,20 @@ function switchLanguages(): void {
   translate();
 }
 
+/**
+ * Fungsi untuk membuat highlight tag underline untuk kosakata terkait
+ */
+function highlightWords(sentence, words) {
+  // Membuat array dari kata-kata dengan memecah string dengan koma dan spasi
+  const wordList = words.split(',').map(word => word.trim());
+  // Mengganti setiap kata dalam array dengan kata yang diberi tag <u>, secara individual
+  wordList.forEach((word) => {
+    const regex = new RegExp(`\\b(${word})\\b`, 'gi');
+    sentence = sentence.replace(regex, '<u>$1</u>');
+  });
+  return sentence;
+}
+
 
 /**
  * Fungsi untuk menerjemahkan teks berdasarkan bahasa sumber dan tujuan.
@@ -82,7 +96,7 @@ async function translate(): Promise<void> {
         (sourceLang === 1 && targetLang === 2) ||
         (sourceLang === 1 && targetLang === 3)
       ) && item.arti.toLowerCase().includes(query);
-      
+
       return sourceToTargetMatch || targetToSourceMatch;
     });
 
@@ -124,17 +138,21 @@ async function translate(): Promise<void> {
     const modalDiv = document.createElement("div")
     modalDiv.id = dynamicId
     modalDiv.className = "hs-overlay hidden w-full h-full fixed top-0 left-0 z-[60] overflow-x-hidden overflow-y-auto"
+    // Menandai kata di contoh_asal
+    const markedAsal = highlightWords(results[0].contoh_asal, results[0].kata);
+    // Menandai kata di contoh_terjemahan
+    const markedTerjemahan = highlightWords(results[0].contoh_terjemahan, results[0].arti);
     modalDiv.innerHTML = `
       <div class="hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-0 opacity-0 ease-out transition-all sm:max-w-lg sm:w-full m-3 sm:mx-auto">
         <div class="flex flex-col bg-white border shadow-sm rounded-xl">
           <div class="flex justify-between items-center py-3 px-4 border-b">
               <div class="flex gap-x-4">
                   <div class="flex flex-col">
-                      <h3
-                          class="text-xl text-gray-900"
-                      >
-                          ${results[0].kata} = <span class="font-inter text-gray-500">${results[0].arti}</span>
-                      </h3>
+                  <h3
+                      class="text-blue-500 font-inter font-semibold"
+                  >
+                      Contoh Penggunaan
+                  </h3>
                   </div>
               </div>
               <button type="button" class="hs-dropdown-toggle inline-flex flex-shrink-0 justify-center items-center h-8 w-8 rounded-md text-gray-500 hover:text-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 focus:ring-offset-white transition-all text-sm" data-hs-overlay="#${dynamicId}">
@@ -146,11 +164,6 @@ async function translate(): Promise<void> {
           </div>                
           <div class="px-6 py-4 space-y-2">
           ${results[0].contoh_asal && results[0].contoh_terjemahan ? `
-              <h3
-                  class="text-blue-500 font-inter font-semibold"
-              >
-                  Contoh Penggunaan
-              </h3>
               <div>
                   <h3
                       class="text-gray-900 text-sm font-inter font-semibold"
@@ -160,7 +173,7 @@ async function translate(): Promise<void> {
                   <p
                       class="text-lg font-inter leading-relaxed text-gray-500"
                   >
-                      ${results[0].contoh_asal}
+                      ${markedAsal}
                   </p>
               </div>
               <div>
@@ -172,7 +185,7 @@ async function translate(): Promise<void> {
                   <p
                       class="text-lg font-inter leading-relaxed text-gray-500"
                   >
-                      ${results[0].contoh_terjemahan}
+                      ${markedTerjemahan}
                   </p>
               </div>
           `
@@ -184,15 +197,15 @@ async function translate(): Promise<void> {
                       disini.</a>
               </p>
           `}
-                  </div>
+                </div>
                   <div class="flex justify-end items-center gap-x-2 py-3 px-4 border-t">
                       <button type="button" class="hs-dropdown-toggle py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm" data-hs-overlay="#${dynamicId}">
-                      Tutup
+                        Tutup
                       </button>
                   </div>
-                  </div>
-              </div>
-            `
+                </div>
+            </div>
+          `
     vocabularyModal.appendChild(modalDiv)
 
     // Tampilkan semua hasil di kontainer hasil

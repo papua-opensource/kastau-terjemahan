@@ -6,6 +6,6 @@ import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://kamus.antroytech.my.id",
+  site: "https://kastauterjemahan.web.id",
   integrations: [tailwind(), alpinejs(), sitemap()]
 });

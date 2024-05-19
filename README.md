@@ -67,3 +67,7 @@ Kami sangat menghargai kontribusi dari komunitas untuk membantu pengembangan "Ka
 ## Ucapan Terima Kasih
 
 Terima kasih kepada semua [kontributor](https://github.com/antroy-tech/kastau-terjemahan/people) dan komunitas yang telah memberikan dukungan untuk pengembangan aplikasi ini.
+
+<br/>
+
+<div align='center'><a href='https://www.websitecounterfree.com'><img src='https://www.websitecounterfree.com/c.php?d=9&id=54026&s=3' border='0' alt='Free Website Counter'></a><br / ><small><a href='https://www.websitecounterfree.com' title="Free Website Counter">Free Website Counter: Since 2024 5/19</a></small></div>
